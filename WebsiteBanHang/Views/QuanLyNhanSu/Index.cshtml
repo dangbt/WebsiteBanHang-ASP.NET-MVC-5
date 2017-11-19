@@ -1,0 +1,129 @@
+﻿@using WebsiteBanHang.Models
+@model IEnumerable<ThanhVien>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+@{ IEnumerable<Quyen> lstQuyen = (IEnumerable<Quyen>)ViewBag.lstQuyen;
+   IEnumerable<LoaiThanhVien> lstLoaiTV = (IEnumerable<LoaiThanhVien>)ViewBag.lstLoaiTV;}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <h2>Danh sách thành viên</h2>
+        <table class="tableKH">
+            <tr style="background-color:green; font-size:20px;">
+                <td>Mã thành viên</td>
+                <td>Tài khoản</td>
+                <td>Mật khẩu</td>
+                <td>Họ tên</td>
+                <td>Địa chỉ</td>
+                <td>Email</td>
+                <td>Số điện thoại</td>
+                <td>Câu hỏi</td>
+                <td>Câu trả lời</td>
+                <td>Mã loại thành viên</td>
+                <td></td>
+                <td></td>
+            </tr>
+            @*Chạy vòng lặp lấy ra các đối tượng từ list model*@
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.MaThanhVien</td>
+                    <td>@item.TaiKhoan</td>
+                    <td>@item.MatKhau</td>
+                    <td>@item.HoTen</td>
+                    <td>@item.DiaChi</td>
+                    <td>@item.Email</td>
+                    <td>@item.SoDienThoai</td>
+                    <td>@item.CauHoi</td>
+                    <td>@item.CauTraLoi</td>
+                    <td>@item.LoaiThanhVien.TenLoai</td>
+                    @if (Session["TaiKhoan"] != null && Session["TaiKhoan"] != "")
+                    {
+                        ThanhVien tv = (ThanhVien)Session["TaiKhoan"];
+
+                        if (tv.MaLoaiTV == 1)
+                    {
+                            <td>@Html.ActionLink("Sửa", "ChinhSua", new { id = item.MaThanhVien })</td>
+                            <td>@Html.ActionLink("Xóa", "XoaKhachHang", new { id = item.MaThanhVien })</td>
+                        }
+
+                    }
+
+                </tr>
+            }
+        </table>
+
+        <br /><br />
+        <h2>Quản lý quyền</h2>
+        <br />
+        @Html.ActionLink("Thêm quyền", "ThemQuyen", null, new { @class = "btn btn-success" })
+        <br /><br />
+        <table class="tableKH">
+            <tr style="background-color:green; font-size:20px;">
+                <td>Mã quyền</td>
+                <td>Tên quyền</td>
+                <td></td>
+                <td></td>
+            </tr>
+            @*Chạy vòng lặp lấy ra các đối tượng từ list model*@
+            @foreach (var quyen in lstQuyen)
+            {
+                <tr>
+                    <td>@quyen.MaQuyen</td>
+                    <td>@quyen.TenQuyen</td>
+                    
+                   
+
+                </tr>
+            }
+        </table>
+
+        <br /><br />
+        <h2>Loại thành viên</h2>
+        <br />
+       
+        <br /><br />
+        <table class="tableKH">
+            <tr style="background-color:green; font-size:20px;">
+                <td>Mã loại</td>
+                <td>Tên loại</td>
+                <td></td>
+                <td></td>
+            </tr>
+            @*Chạy vòng lặp lấy ra các đối tượng từ list model*@
+            @foreach (var loaitv in lstLoaiTV)
+            {
+                <tr>
+                    <td>@loaitv.MaLoaiTV</td>
+                    <td>@loaitv.TenLoai</td>
+                    <td> @Html.ActionLink("Phân quyền", "phanquyen",  new { id= loaitv.MaLoaiTV })</td>
+
+
+
+</tr>
+            }
+        </table>
+
+    </div>
+</body>
+</html>
+<style>
+    .tableKH {
+        border: 1px solid;
+        text-align: center;
+        width: 100%;
+        font-size: 15px;
+    }
+
+        .tableKH td {
+            border: 1px solid;
+        }
+</style>

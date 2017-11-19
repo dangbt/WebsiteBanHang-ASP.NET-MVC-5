@@ -1,0 +1,41 @@
+﻿@using WebsiteBanHang.Models
+@model IEnumerable<SanPham>
+@foreach (var item in Model)
+{
+<div class="col-md-4 grid-top">
+    <a href="@Url.RouteUrl("XemChiTiet", new { @id = item.MaSP,@tensp=item.TenSP})" class="b-link-stripe b-animate-go  thickbox">
+        <img class="img-responsive" src="@Url.Content("~/Content/images/"+item.HinhAnh)" alt="">
+        <div class="b-wrapper">
+            <h3 class="b-animate b-from-left    b-delay03 " style="height:100%">
+                <span>Xem thông tin chi tiết</span>
+            </h3>
+        </div>
+    </a>
+     <p ><a href="@Url.RouteUrl("XemChiTiet", new { @id = item.MaSP,@tensp=item.TenSP})">@item.TenSP<div >@item.DonGia.Value.ToString("#,##") VNĐ</div></a></p>
+</div>
+}
+<div class="col-md-4 grid-top">
+    <a href="single.html" class="b-link-stripe b-animate-go  thickbox">
+        <img class="img-responsive" src="~/Content/images/pi1.jpg" alt="">
+        <div class="b-wrapper">
+            <h3 class="b-animate b-from-left    b-delay03 ">
+                <span>Shoe</span>
+            </h3>
+        </div>
+    </a>
+    <p><a href="single.html">classical Latin</a></p>
+</div>
+
+<div class="col-md-4 grid-top">
+    <a href="single.html" class="b-link-stripe b-animate-go  thickbox">
+        <img class="img-responsive" src="~/Content/images/pi2.jpg" alt="">
+        <div class="b-wrapper">
+            <h3 class="b-animate b-from-left    b-delay03 ">
+                <span>Bag</span>
+            </h3>
+        </div>
+    </a>
+    <p><a href="single.html">undoubtable</a></p>
+</div>
+<div class="clearfix"> </div>
+

@@ -1,0 +1,65 @@
+﻿@model WebsiteBanHang.Models.KhachHang
+@{
+    ViewBag.Title = "XoaKhachHang";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+@*Bước 1: Khi thêm hình ảnh*@
+@using (Html.BeginForm("XoaKhachHang", "KhachHang", FormMethod.Post, new { }))
+{
+    <div class="form-horizontal">
+        @Html.Hidden("MaKH", Model.MaKH)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TenKh, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TenKh)
+                @Html.ValidationMessageFor(model => model.TenKh)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DiaChi, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DiaChi)
+                @Html.ValidationMessageFor(model => model.DiaChi)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.SoDienThoai, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SoDienThoai)
+                @Html.ValidationMessageFor(model => model.SoDienThoai)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Xác nhận xóa" class="btn btn-danger" />
+            </div>
+        </div>
+
+    </div>
+}
+<div class="backtolist">
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<style>
+    .FooterAdmin {
+        display: none;
+    }
+
+    .backtolist {
+        text-align: center;
+        color: #000;
+        font-size: 30px;
+        background-color: #b6ff00;
+    }
+</style>

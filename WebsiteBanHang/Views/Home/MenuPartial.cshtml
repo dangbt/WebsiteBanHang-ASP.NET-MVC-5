@@ -1,0 +1,44 @@
+﻿@using WebsiteBanHang.Models
+@model IEnumerable<SanPham>
+<link href="~/Content/css/displayblock.css" rel="stylesheet" />
+<div class=" h_menu4">
+    <ul class="memenu skyblue">
+        <li class="active grid"><a class="color8" href="@Url.Action("index","Home")">Trang chủ</a></li>
+
+        @foreach (var groupItem in Model.GroupBy(n => n.LoaiSanPham))
+            {
+                if (groupItem.Key != null)
+                {
+                <li>
+
+                    <a class="color1" href="#">@groupItem.Key.TenLoai</a>
+                    <div class=" displayblock mepanel " >
+                        <div class="row">
+                            @foreach (var item in groupItem.GroupBy(n => n.NhaSanXuat))
+                            {
+                                if (item.Key != null)
+                                {
+                                    <div class="col1">
+                                        <div class="h_nav">
+                                            <ul>
+
+                                                <li><a href="@Url.Action("SanPham", "SanPham", new { @MaLoai = groupItem.Key.MaLoai, @MaNSX=item.Key.MaNSX })">@groupItem.Key.TenLoai @item.Key.TenNSX</a></li>
+
+
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                </li>
+            }
+        }
+       
+        <li><a class="color4" href="blog.html">Blog</a></li>
+        <li><a class="color6" href="contact.html">Conact</a></li>
+    </ul>
+</div>

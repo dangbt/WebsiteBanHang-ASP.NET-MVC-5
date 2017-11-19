@@ -1,0 +1,79 @@
+﻿@using WebsiteBanHang.Models
+@model List<ItemGioHang>
+@{
+    ViewBag.Title = "XemGioHang";
+    Layout = "~/Views/Layout/ProductLayout.cshtml";
+}
+@if (ViewBag.ThongBao == null)
+{
+    if (Model == null || Model.Count == 0)
+    {
+        <h1 style="color:#000;text-align:center;">Giỏ hàng rổng!</h1>
+    }
+    else
+    {
+        using (@Html.BeginForm())
+        {
+            if(Session["TaiKhoan"]==null || Session["TaiKhoan"]=="")
+            {
+            <div style="font-size:24px;padding-bottom:10px">Thông tin người mua/Nhận hàng</div>
+            <div class="col-md-6 register-top-grid">
+                <div class="titleclass">
+                    <span style="color:red">Tên khách hàng</span>
+                    <input type="text" required="" name="txtTenKhachHang" />
+                </div>
+                <div class="titleclass">
+                    <span style="color:red">Địa chỉ</span>
+                    <input type="text" required=""name="txtDiaChi" />
+                </div>
+                <div class="titleclass">
+                    <span style="color:red">Số điện thoại</span>
+                    <input type="text"required="" name="txtSoDienThoai" />
+                </div>
+                <div class="titleclass">
+                    <span style="color:red">Email</span>
+                    <input type="text" required="" name="txtEmail" />
+                </div>
+            </div>
+            }
+            <div class="col-md-6 register-bottom-grid register-top-grid">
+                <table class="table">
+                    <tr>
+
+                        <td>Tên SP</td>
+                        <td>Hình ảnh</td>
+                        <td>Số lượng</td>
+                        <td>Đơn giá</td>
+                        <td>Thành tiền</td>
+                        <td></td>
+
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>@item.TenSP</td>
+                            <td><img src="@Url.Content("~/Content/images/" + item.HinhAnh)" width="50" height="50" /></td>
+                            <td>@item.SoLuong</td>
+                            <td>@item.DonGia.ToString("#,##") đồng</td>
+                            <td>@item.ThanhTien.ToString("#,##") đồng</td>
+                            <td>
+                                @Html.ActionLink("Sửa", "SuaGioHang", new { @MaSP = item.MaSP })
+                                @Html.ActionLink("Xóa", "XoaGioHang", new { @MaSP = item.MaSP })
+                            </td>
+
+                        </tr>
+
+                    }
+                </table>
+            </div>
+            <input value="Đặt hàng" type="submit">
+        }
+    }
+
+
+}
+else
+{
+    <h1 style="color:#000;text-align:center;">@ViewBag.ThongBao</h1>
+}

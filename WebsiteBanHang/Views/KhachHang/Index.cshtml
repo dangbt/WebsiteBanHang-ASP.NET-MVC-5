@@ -1,0 +1,55 @@
+﻿@model IEnumerable<WebsiteBanHang.Models.KhachHang>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div> 
+    <table class="tableKH">
+        <tr style="background-color:green; font-size:20px;">
+            <td>Mã khách hàng</td>
+            <td>Tên khách hàng</td>
+            <td>Địa chỉ</td>
+            <td>Email</td>
+            <td>Số điện thoại</td>
+            <td></td>
+            <td></td>
+        </tr>
+            @*Chạy vòng lặp lấy ra các đối tượng từ list model*@
+            @foreach (var item in Model)
+            {
+              <tr>
+                  <td>@item.MaKH</td>
+                  <td>@item.TenKh</td>
+                  <td>@item.DiaChi</td>
+                  <td>@item.Email</td>
+                  <td>@item.SoDienThoai</td>
+                  <td>@Html.ActionLink("Sửa", "ChinhSua", new { id = item.MaKH })</td>
+                  <td>@Html.ActionLink("Xóa", "XoaKhachHang", new { id = item.MaKH })</td>
+              </tr> 
+            }
+    </table>
+
+ 
+    </div>
+</body>
+</html>
+<style>
+    .tableKH {
+        border: 1px solid;
+        text-align:center;
+        width:100%;
+        font-size:15px;
+    }
+        .tableKH td {
+            border: 1px solid;
+        }
+</style>

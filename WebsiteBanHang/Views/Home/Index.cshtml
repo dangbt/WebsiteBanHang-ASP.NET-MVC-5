@@ -1,0 +1,20 @@
+﻿@using WebsiteBanHang.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/HomeLayout.cshtml";
+}
+@{ IEnumerable<SanPham> lstSp = (IEnumerable<SanPham>)ViewBag.LstSP;}
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<div class="container">
+    <div class="content-top" style="padding:0;">  
+                <div class="grid-in">
+            
+                @Html.Partial("~/Views/SanPham/SanPhamStyle2Partial.cshtml", lstSp)
+           
+        </div>
+
+
+
+    </div>
+</div>
